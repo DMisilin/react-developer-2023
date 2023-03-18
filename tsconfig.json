@@ -14,7 +14,16 @@
     "experimentalDecorators": true,
     "strictNullChecks": true,
     "baseUrl": "./src",
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "jsx": "react",
+    "allowJs": true
   },
-  "rules": {}
+  "rules": {},
+  "include": [
+    "src/**/*",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

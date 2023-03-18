@@ -17,3 +17,7 @@ Repository for OTUS react developer
 #### start
 
 `npm run calc`
+
+#### test
+
+`npm run test`
