@@ -1,15 +1,15 @@
-export const plus: operationFn = (a: number, b: number): number => a + b;
+export const plus: OperationFn = (a: number, b: number): number => a + b;
 
-export const minus: operationFn = (a: number, b: number): number => a - b;
+export const minus: OperationFn = (a: number, b: number): number => a - b;
 
-export const division: operationFn = (a: number, b: number): number => a / b;
+export const division: OperationFn = (a: number, b: number): number => a / b;
 
-export const multiplication: operationFn = (a: number, b: number): number => a * b;
+export const multiplication: OperationFn = (a: number, b: number): number => a * b;
 
-export type operator = '+' | '-' | '*' | '/';
-export type operationFn = (a: number, b: number) => number;
+export type Operator = '+' | '-' | '*' | '/';
+export type OperationFn = (a: number, b: number) => number;
 
-export const mathFunctions: { [key in operator]: operationFn } = {
+export const mathFunctions: { [key in Operator]: OperationFn } = {
     "+": plus,
     "-": minus,
     "*": multiplication,

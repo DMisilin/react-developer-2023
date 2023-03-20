@@ -1,4 +1,4 @@
-import { mathFunctions, operationFn, operator } from "./math-method";
+import { mathFunctions, OperationFn, Operator } from "./math-method";
 import { isEnd, isNumber, isOperator } from "./helper";
 
 const multiplication = '*';
@@ -32,8 +32,8 @@ export const plusOrMinus = (arr: string[]): number  => {
     let result = +arr[0] | 0;
 
     for(let i = 1; i < arr.length; i += 2) {
-        const op: operator = (arr[i] as operator);
-        const fn: operationFn = mathFunctions[op];
+        const op: Operator = (arr[i] as Operator);
+        const fn: OperationFn = mathFunctions[op];
         result = fn(+result, +arr[i + 1]);
     }
 
@@ -52,8 +52,8 @@ export const multiOrDivision = (arr: string[]): string[]  => {
         const elm = arr[i];
 
         if (elm === division || elm === multiplication) {
-            const op: operator = (arr[i] as operator);
-            const fn: operationFn = mathFunctions[op];
+            const op: Operator = (arr[i] as Operator);
+            const fn: OperationFn = mathFunctions[op];
 
             const a = temp ? +temp : +arr[i - 1];
             const b = +arr[i + 1];

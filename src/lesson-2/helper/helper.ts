@@ -1,5 +1,9 @@
 const OPERATORS = ['+', '-', '*', '/'];
 
+export const isMultiplierOrDivisorOp = (str: string): str is '*' | '/' => {
+    return ['*', '/'].includes(str);
+};
+
 export const isOperator = (str: string): boolean => {
     return OPERATORS.includes(str);
 }
