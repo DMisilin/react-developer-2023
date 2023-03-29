@@ -3,7 +3,7 @@ import {
     minus,
     multiplication,
     division
-} from 'lesson-2/helper/math-method';
+} from 'src/lesson-2/helper/math-method';
 
 describe(('math functions'), () => {
     describe('plus function', () => {

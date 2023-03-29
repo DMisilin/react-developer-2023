@@ -6,12 +6,12 @@ export const division: OperationFn = (a: number, b: number): number => a / b;
 
 export const multiplication: OperationFn = (a: number, b: number): number => a * b;
 
-export type Operator = '+' | '-' | '*' | '/';
+export type Operator = "+" | "-" | "*" | "/";
 export type OperationFn = (a: number, b: number) => number;
 
-export const mathFunctions: { [key in Operator]: OperationFn } = {
+export const mathFunctions: {[key in Operator]: OperationFn} = {
     "+": plus,
     "-": minus,
     "*": multiplication,
     "/": division
-}
+};

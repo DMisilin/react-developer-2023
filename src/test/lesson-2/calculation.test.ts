@@ -1,8 +1,4 @@
-import {
-    getStack,
-    plusOrMinus,
-    multiOrDivision,
-} from 'lesson-2/helper/calculation';
+import {getStack, plusOrMinus, multiOrDivision} from "src/lesson-2/helper/calculation";
 
 describe('calculation functions', () => {
     describe('getStack', () => {

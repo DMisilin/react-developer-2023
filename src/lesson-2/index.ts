@@ -1,5 +1,5 @@
-import * as readline from 'readline';
-import { calculation } from "./helper/calculation";
+import * as readline from "readline";
+import {calculation} from "./helper/calculation";
 
 const readlineInterface = readline.createInterface({
     input: process.stdin,
