@@ -1,0 +1,28 @@
+.zero {
+    background-color: whitesmoke;
+}
+
+.first {
+    background-color: lightcoral;
+}
+
+.second {
+    background-color: orange;
+}
+
+.third {
+    background-color: orangered;
+}
+
+.box {
+    height: 250px;
+    width: 250px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 170px;
+    font-family: monospace;
+    color: grey;
+    border-radius: 20px;
+}

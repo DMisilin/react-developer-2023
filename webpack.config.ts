@@ -9,7 +9,6 @@ const webpackConfig = (env): Configuration => ({
     ...(env.production || !env.development ? {} : {devtool: "eval-source-map"}),
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
-        //TODO waiting on https://github.com/dividab/tsconfig-paths-webpack-plugin/issues/61
         //@ts-ignore
         plugins: [new TsconfigPathsPlugin()]
     },
@@ -26,7 +25,12 @@ const webpackConfig = (env): Configuration => ({
                     transpileOnly: true
                 },
                 exclude: /dist/
-            }
+            },
+            {
+                exclude: "/node_modules/",
+                test: /\.css$/,
+                use: ['style-loader','css-loader'],
+            },
         ]
     },
     plugins: [

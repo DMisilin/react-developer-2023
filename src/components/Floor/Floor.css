@@ -1,0 +1,16 @@
+.yellow {
+    background-color: yellow;
+    width: 900px;
+    height: 900px;
+    display: flex;
+    align-content: stretch;
+    justify-content: center;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.sky {
+    background-color: deepskyblue;
+    width: 900px;
+    height: 900px;
+}
