@@ -1,16 +1,38 @@
-.yellow {
-    background-color: yellow;
-    width: 900px;
-    height: 900px;
+.floor {
     display: flex;
     align-content: stretch;
     justify-content: center;
     flex-wrap: wrap;
-    padding: 20px;
+    padding: 2px;
+    border-radius: 20px;
+}
+
+.yellow {
+    background-color: yellow;
+    width: 360px;
+    height: 360px;
 }
 
 .sky {
     background-color: deepskyblue;
-    width: 900px;
-    height: 900px;
+    width: 360px;
+    height: 360px;
+}
+
+.buttonPanel {
+    margin-top: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.playerButton {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 50px;
+}
+
+.cleanButton {
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 280px;
 }

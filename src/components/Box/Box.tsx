@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Box.css';
 
-const Box = ({ point = 0 }) => {
-  const classes = ['zero', 'first', 'second', 'third'];
-  console.log(`box ${classes[point]}`);
+const Box = ({ point, order }) => {
+  const classes = ['zero', 'first', 'second', 'third', 'fourth', 'fifth'];
 
-  return <div className={`box ${classes[point]}`}>{point}</div>;
+  return (
+    <div className={`box ${classes[point]}`} id={order}>
+      {point}
+    </div>
+  );
 };
 
 export default Box;
