@@ -1,0 +1,17 @@
+.medium {
+    text-align: right;
+    font-size: 16px;
+    font-family: monospace;
+    border-radius: 6px;
+    width: 200px;
+    margin: 5px;
+    padding: 5px;
+}
+
+.big {
+    text-align: center;
+    font-size: 27px;
+    font-family: monospace;
+    border-radius: 6px;
+    width: 200px;
+}

@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
 import './Floor.css';
 import Box from '../Box/Box';
-import Button from '../../components/Button/Button';
+import Button from '../Button/Button';
+import Text from '../Text/Text';
 
 const Floor = ({ groundType = 'yellow' }) => {
   const [isLeft, setIsLeft] = useState(true);
 
   const updateArr = (position: 'left' | 'right') => {
     if ((position === 'left' && !isLeft) || (position === 'right' && isLeft)) {
-      console.warn('Not your move');
+      alert(`Not your move`);
+      console.error('Not your move');
       return arr;
     }
 
@@ -47,8 +49,17 @@ const Floor = ({ groundType = 'yellow' }) => {
     return result;
   };
 
+  const clean = () => {
+    setArr(initArr());
+    setIsLeft(true);
+  };
+
   return (
     <div className="buttonPanel" role="Panel">
+      <Text
+        text="Нажимай кнопки по очереди, пока один из кубиков не наберет 5 очков. Начинает Левый"
+        size="medium"
+      ></Text>
       <div className="playerButton">
         <Button
           text="left"
@@ -65,11 +76,7 @@ const Floor = ({ groundType = 'yellow' }) => {
         ></Button>
       </div>
       <div className="cleanButton">
-        <Button
-          text="rebuild"
-          type="blue"
-          onClick={() => setArr(initArr())}
-        ></Button>
+        <Button text="rebuild" type="blue" onClick={() => clean()}></Button>
       </div>
     </div>
   );

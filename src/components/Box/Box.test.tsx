@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import Box from './Box';
 
-describe('Box element', () => {
-  test('Box rendering with set N point', () => {
+describe('Text element', () => {
+  test('Text rendering with set N point', () => {
     const randomPoint = Math.floor(Math.random() * 4);
     render(<Box point={randomPoint} order={randomPoint + 1} />);
 
