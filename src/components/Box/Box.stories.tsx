@@ -10,7 +10,7 @@ export default {
       type: 'number',
       description: 'Количество очков',
       defaultValue: 1,
-      options: [0, 1, 2, 3],
+      options: [0, 1, 2, 3, 4, 5],
       control: {
         type: 'radio',
       },

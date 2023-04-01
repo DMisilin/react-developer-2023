@@ -3,7 +3,7 @@ import './Floor.css';
 import Box from '../Box/Box';
 import Button from '../../components/Button/Button';
 
-const Floor = ({ groundType }) => {
+const Floor = ({ groundType = 'yellow' }) => {
   const [isLeft, setIsLeft] = useState(true);
 
   const updateArr = (position: 'left' | 'right') => {
@@ -48,7 +48,7 @@ const Floor = ({ groundType }) => {
   };
 
   return (
-    <div className="buttonPanel">
+    <div className="buttonPanel" role="Panel">
       <div className="playerButton">
         <Button
           text="left"
