@@ -1,9 +1,9 @@
 import React from 'react';
 import './Text.css';
 
-const Text = ({ text, size, border }) => {
+const Text = ({ text, size }) => {
   return (
-    <p className={`${size} ${border}`} role="Text">
+    <p className={size} role="Text">
       {text}
     </p>
   );
