@@ -4,7 +4,7 @@ import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
 
-const Floor = ({ groundType = 'yellow' }) => {
+const Floor = ({ groundType = 'yellow', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
 
   const updateArr = (position: 'left' | 'right') => {
@@ -31,6 +31,10 @@ const Floor = ({ groundType = 'yellow' }) => {
   };
 
   const initArr = () => {
+    if (testMode) {
+      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
+    }
+
     const result = [];
     for (let i = 0; i < 9; i++) {
       result.push(Math.floor(Math.random() * 3));
