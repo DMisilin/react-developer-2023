@@ -4,8 +4,23 @@ import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
 
+const ARR_LENGTH = 9;
+
 const Floor = ({ groundType = 'yellow', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
+  const [arr, setArr] = useState(initArr());
+
+  function initArr() {
+    if (testMode) {
+      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
+    }
+
+    const result = [];
+    for (let i = 0; i < ARR_LENGTH; i++) {
+      result.push(Math.floor(Math.random() * 3));
+    }
+    return result;
+  }
 
   const updateArr = (position: 'left' | 'right') => {
     if ((position === 'left' && !isLeft) || (position === 'right' && isLeft)) {
@@ -30,25 +45,10 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     return result;
   };
 
-  const initArr = () => {
-    if (testMode) {
-      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
-    }
-
-    const result = [];
-    for (let i = 0; i < 9; i++) {
-      result.push(Math.floor(Math.random() * 3));
-    }
-    return result;
-  };
-
-  const [arr, setArr] = useState(initArr());
-
   const renderBoxes = () => {
     const result = [];
     for (let i = 0; i < arr.length; i++) {
-      const num = arr[i];
-      result.push(<Box key={i} point={num} order={i} />);
+      result.push(<Box key={i} point={arr[i]} order={i} />);
     }
     return result;
   };
