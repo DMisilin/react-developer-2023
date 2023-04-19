@@ -55,7 +55,7 @@ jobs:
       - name: Install packages
         run: npm ci
 
-      - name: Run linter
+      - name: Run test
         run: npm run test
 
   chromatic-deployment:
