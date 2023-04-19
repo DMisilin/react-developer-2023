@@ -27,5 +27,8 @@
   "include": [
     "./src",
     "./webpack.config.ts"
+  ],
+  "exclude": [
+    "./src/mock"
   ]
 }

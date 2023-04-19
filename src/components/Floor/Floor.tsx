@@ -22,6 +22,12 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     return result;
   }
 
+  // Publish to Score.tsx
+  const publish = (eventName, data: { isLeft: boolean }) => {
+    const event = new CustomEvent(eventName, { detail: data });
+    document.dispatchEvent(event);
+  };
+
   const updateArr = (position: 'left' | 'right') => {
     if ((position === 'left' && !isLeft) || (position === 'right' && isLeft)) {
       alert(`Not your move`);
@@ -37,6 +43,7 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
 
     setTimeout(() => {
       if (result.find((elm) => elm >= 5)) {
+        publish('myEvent', { isLeft });
         alert(`Player ${isLeft ? 'LEFT' : 'RIGHT'} win!`);
       }
     }, 100);
