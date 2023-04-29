@@ -1,0 +1,74 @@
+name: radar CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  build:
+    name: build
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        node-version: [16.10]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run linter
+        run: npm run lint
+
+      - name: Build app
+        run: npm run build
+        env:
+          CI: false
+
+  test:
+    name: test
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        node-version: [ 16.10 ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run test
+        run: npm run test
+
+  chromatic-deployment:
+    name: chromatic
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v1
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Publish to Chromatic
+        uses: chromaui/action@v1
+        with:
+          projectToken: ${{ secrets.CHROMATIC_PROJECT_TOKEN }}

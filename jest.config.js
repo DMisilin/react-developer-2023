@@ -1,17 +1,12 @@
+const esModules = ['@agm', 'ngx-bootstrap'].join('|');
+
 module.exports = {
     clearMocks: true,
-    collectCoverage: true,
-    collectCoverageFrom: [
-        '**/src/**',
-        '!**/node_modules/**',
-        '!**/dist/**',
-        '!**/test/**',
-    ],
-    coverageDirectory: '<rootDir>/src/test/coverage',
-    testEnvironment: 'node',
-    testMatch: ['**/*.test.ts'],
-    preset: 'ts-jest',
-    moduleDirectories: ['node_modules', 'src'],
-    testTimeout: 20000,
-    roots: ['./src'],
+    coverageDirectory: "coverage",
+    testEnvironment: "jsdom",
+    "transform": {
+        "\\.[jt]sx?$": "babel-jest",
+        ".+\\.(css|styl|less|sass|scss)$": "jest-css-modules-transform"
+    },
+    moduleDirectories: ["node_modules", "src"],
 };

@@ -1,2 +1,7 @@
 node_modules
 dist
+webpack.config.ts
+jest.config.js
+coverage
+*test*
+mock
