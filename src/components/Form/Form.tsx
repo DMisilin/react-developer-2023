@@ -1,95 +1,11 @@
-import React, { memo, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-
-// type InputNameProps = {
-//   value: string;
-//   onChange: (v: string) => void;
-// };
-//
-// type InputSizeProps = {
-//   value: number;
-//   onChange: (v: number) => void;
-// };
-//
-// const MyInput = memo<InputNameProps>(({ value, onChange }) => {
-//   return (
-//     <input
-//       onChange={(event) => onChange(event.target.value)}
-//       value={value}
-//     ></input>
-//   );
-// });
-// MyInput.displayName = 'MyInput';
-//
-// const Form = () => {
-//   console.log();
-//   const [value, setValue] = useState('');
-//   const onSubmit = (event) => {
-//     event.preventDefault();
-//     console.log('lo_ol_line_16--> event: ', value);
-//   };
-//
-//   return (
-//     <form onSubmit={onSubmit}>
-//       <fieldset>
-//         <legend>Inter players names and floor size</legend>
-//         <MyInput onChange={(v) => setValue(v)} value={value}></MyInput>
-//         <button type="submit">Start</button>
-//       </fieldset>
-//     </form>
-//   );
-// };
-
-const StyledInput = styled.input`
-  margin: 5px;
-  font-size: 20px;
-  border: #000088;
-  font-family: monospace;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 20px;
-  width: 100%;
-  padding: 10px;
-  font-family: monospace;
-`;
-
-const StyledForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  width: 400px;
-  height: 250px;
-  background-color: #e1eedd;
-  border-radius: 4px;
-`;
-
-const StyledButton = styled.button`
-  width: 93%;
-  margin-left: 15px;
-  padding: 5px;
-  outline: none;
-  border: none;
-  border-radius: 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
-  font-family: monospace;
-  font-size: 1em;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  cursor: pointer;
-  user-select: none;
-  transition: 0.2s;
-  background-color: #f9cd0b;
-
-  &:hover {
-    transform: scale(1.05);
-  }
-
-  &:active {
-    box-shadow: none;
-  }
-`;
+import {
+  StyledInput,
+  StyledLabel,
+  StyledForm,
+  StyledButton,
+} from '../styles/components';
 
 const StyledP = styled.p`
   padding: 10px;
@@ -129,17 +45,17 @@ const Form = ({ onStart, onSize }) => {
 
   return (
     <>
-      <StyledForm onSubmit={onSubmit}>
-        <StyledLabel>
+      <StyledForm onSubmit={onSubmit} role="Form">
+        <StyledLabel role="Label">
           player 1: <StyledInput name="player1" defaultValue="player1" />
         </StyledLabel>
-        <StyledLabel>
+        <StyledLabel role="Label">
           player 2: <StyledInput name="player2" defaultValue="player2" />
         </StyledLabel>
         <StyledP>
           Size:
-          <StyledLabel>
-            <StyledInput type="radio" name="myRadio" value="3x3" />
+          <StyledLabel role="Label">
+            <StyledInput type="radio" name="myRadio" value="3x3" role="Input" />
             3x3
           </StyledLabel>
           <StyledLabel>
@@ -147,16 +63,19 @@ const Form = ({ onStart, onSize }) => {
               type="radio"
               name="myRadio"
               value="4x4"
+              role="Input"
               defaultChecked={true}
             />{' '}
             4x4
           </StyledLabel>
-          <StyledLabel>
-            <StyledInput type="radio" name="myRadio" value="5x5" />
+          <StyledLabel role="Label">
+            <StyledInput type="radio" name="myRadio" value="5x5" role="Input" />
             5x5
           </StyledLabel>
         </StyledP>
-        <StyledButton type="submit">Start</StyledButton>
+        <StyledButton type="submit">
+          Start
+        </StyledButton>
       </StyledForm>
     </>
   );

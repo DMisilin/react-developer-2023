@@ -14,7 +14,7 @@ describe('Floor element', () => {
     const buttons = screen.getAllByRole('button');
     const boxes = screen.getAllByRole('Box');
 
-    expect(buttons.length).toBe(3);
+    expect(buttons.length).toBe(4);
     expect(boxes.length).toBe(9);
   });
 });

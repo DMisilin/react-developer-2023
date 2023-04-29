@@ -1,47 +1,20 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import './Floor.css';
 import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
 import Form from '../Form/Form';
+import {
+  StyledCenteredDiv,
+  StyledFloorDiv,
+  StyledLabel,
+} from '../styles/components';
 
 const START_DATA_DEFAULT = {
   player1: 'name',
   player2: 'name',
   size: '0x0',
 };
-const handleWidth = (size: string) => {
-  switch (size) {
-    case '5x5':
-      return '630px';
-    case '4x4':
-      return '490px';
-    default:
-      return '370px';
-  }
-};
-
-const StyledCenteredDiv = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 20px;
-`;
-
-const StyledFloorDiv = styled.div<{ size: string }>`
-  display: flex;
-  flex-wrap: wrap;
-  width: ${({ size = '3x3' }) => handleWidth(size)};
-  height: ${({ size = '3x3' }) => handleWidth(size)};
-`;
-
-const StyledLabel = styled.label`
-  font-size: 20px;
-  width: auto;
-  padding: 10px;
-  font-family: monospace;
-  text-align: center;
-`;
 
 const Floor = ({ groundType = '', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);

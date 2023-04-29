@@ -43,7 +43,7 @@ const webpackConfig = (env): Configuration => ({
             "process.env.VERSION": JSON.stringify(require("./package.json").version)
         }),
         new ForkTsCheckerWebpackPlugin()
-    ]
+    ],
 });
 
 export default webpackConfig;
