@@ -6,21 +6,23 @@
 // type FIXME = any; => Array<OrderState>
 
 const orderStates = [
-    "initial",
-    "inWork",
-    "buyingSupplies",
-    "producing",
-    "fullfilled",
+  'initial',
+  'inWork',
+  'buyingSupplies',
+  'producing',
+  'fullfilled',
 ] as const;
 
-type OrderState = typeof orderStates[number];
+type OrderState = (typeof orderStates)[number];
 
-export const getUserOrderStates = (orderStates: OrderState[]): Array<OrderState> => {
-    const filteredStates = [] as Array<OrderState>;
-    orderStates.forEach((element) => {
-        if (element !== "buyingSupplies" && element !== "producing") {
-            filteredStates.push(element);
-        }
-    });
-    return filteredStates;
+export const getUserOrderStates = (
+  orderStates: OrderState[],
+): Array<OrderState> => {
+  const filteredStates = [] as Array<OrderState>;
+  orderStates.forEach((element) => {
+    if (element !== 'buyingSupplies' && element !== 'producing') {
+      filteredStates.push(element);
+    }
+  });
+  return filteredStates;
 };
