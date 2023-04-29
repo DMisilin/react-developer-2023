@@ -33,4 +33,19 @@
     font-family: monospace;
     color: grey;
     border-radius: 20px;
+    animation: show-box .5s forwards;
+}
+
+@keyframes show-box {
+    0% {
+        opacity: 0;
+        scale: 1;
+    }
+    50% {
+        scale: 1.1;
+    }
+    100% {
+        opacity: 1;
+        scale: 1;
+    }
 }

@@ -1,26 +1,52 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import './Floor.css';
 import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
+import Form from 'components/Form/Form';
 
-const ARR_LENGTH = 9;
+const START_DATA_DEFAULT = {
+  player1: 'player1',
+  player2: 'player2',
+  size: '0x0',
+};
+const handleWidth = (size: string) => {
+  switch (size) {
+    case '5x5':
+      return '600px';
+    case '4x4':
+      return '480px';
+    default:
+      return '360px';
+  }
+};
+
+const StyledFloorDiv = styled.div<{ size: string }>`
+  display: flex;
+  flex-wrap: wrap;
+  background-color: yellow;
+  width: ${({ size = '3x3' }) => handleWidth(size)};
+  height: ${({ size = '3x3' }) => handleWidth(size)};
+`;
 
 const Floor = ({ groundType = 'yellow', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
-  const [arr, setArr] = useState(initArr());
+  const [startData, setStartData] = useState(START_DATA_DEFAULT);
+  const [arr, setArr] = useState([]);
 
-  function initArr() {
-    if (testMode) {
-      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
-    }
-
-    const result = [];
-    for (let i = 0; i < ARR_LENGTH; i++) {
-      result.push(Math.floor(Math.random() * 3));
-    }
-    return result;
-  }
+  // function initArr() {
+  //   if (testMode) {
+  //     return [0, 1, 2, 3, 4, 5, 4, 3, 2];
+  //   }
+  //
+  //   const result = [];
+  //   const elements = startData.size.split('x').map((elm) => +elm);
+  //   for (let i = 0; i < elements[0] * elements[1]; i++) {
+  //     result.push(Math.floor(Math.random() * 3));
+  //   }
+  //   return result;
+  // }
 
   // Publish to Score.tsx
   const publish = (eventName, data: { isLeft: boolean }) => {
@@ -44,7 +70,7 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     setTimeout(() => {
       if (result.find((elm) => elm >= 5)) {
         publish('myEvent', { isLeft });
-        alert(`Player ${isLeft ? 'LEFT' : 'RIGHT'} win!`);
+        alert(`Player ${isLeft ? startData.player1 : startData.player2} win!`);
       }
     }, 100);
 
@@ -52,36 +78,42 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     return result;
   };
 
-  const renderBoxes = () => {
-    const result = [];
-    for (let i = 0; i < arr.length; i++) {
-      result.push(<Box key={i} point={arr[i]} order={i} />);
-    }
-    return result;
-  };
+  // const renderBoxes = () => {
+  //   const result = [];
+  //   for (let i = 0; i < arr.length; i++) {
+  //     result.push(<Box key={i} point={arr[i]} order={i} />);
+  //   }
+  //   return result;
+  // };
 
   const clean = () => {
-    setArr(initArr());
+    setArr([]);
+    setStartData(START_DATA_DEFAULT);
     setIsLeft(true);
   };
 
   return (
     <div className="buttonPanel" role="Panel">
+      <Form onStart={setStartData} onSize={setArr} />
       <Text
         text="Нажимай кнопки по очереди, пока один из кубиков не наберет 5 очков. Начинает Левый"
         size="medium"
       ></Text>
       <div className="playerButton">
         <Button
-          text="left"
+          text={startData.player1}
           type="eco"
           onClick={() => setArr(updateArr('left'))}
         ></Button>
       </div>
-      <div className={`floor ${groundType}`}>{renderBoxes()}</div>
+      <StyledFloorDiv size={startData.size}>
+        {arr.map((elm, i) => (
+          <Box key={i} point={arr[i]} order={i} />
+        ))}
+      </StyledFloorDiv>
       <div className="playerButton">
         <Button
-          text="right"
+          text={startData.player2}
           type="eco"
           onClick={() => setArr(updateArr('right'))}
         ></Button>

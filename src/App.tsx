@@ -6,7 +6,7 @@ const App = () => {
   return (
     <>
       <Floor groundType="yellow" testMode={false}></Floor>
-      <Score />
+      {/*<Score />*/}
     </>
   );
 };
