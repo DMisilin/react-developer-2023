@@ -61,7 +61,7 @@ const StyledForm = styled.form`
   flex-wrap: wrap;
   width: 400px;
   height: 250px;
-  background-color: #cccccc;
+  background-color: #e1eedd;
   border-radius: 4px;
 `;
 
@@ -80,6 +80,7 @@ const StyledButton = styled.button`
   cursor: pointer;
   user-select: none;
   transition: 0.2s;
+  background-color: #f9cd0b;
 
   &:hover {
     transform: scale(1.05);

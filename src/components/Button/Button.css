@@ -21,10 +21,25 @@
     display: inline-block;
     font-size: 24px;
     font-family: monospace;
+
+    outline: none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+    letter-spacing: 2px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.eco:hover {
+    transform: scale(1.05);
+}
+
+.eco:active {
+    box-shadow: none;
 }
 
 .blue {
-    background-color: dodgerblue;
+    background-color: #39395f;
     border: none;
     border-radius: 16px;
     color: white;
@@ -34,4 +49,19 @@
     display: inline-block;
     font-size: 28px;
     font-family: "American Typewriter", serif;
+
+    outline: none;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.55);
+    letter-spacing: 2px;
+    cursor: pointer;
+    user-select: none;
+    transition: 0.2s;
+}
+
+.blue:hover {
+    transform: scale(1.05);
+}
+
+.blue:active {
+    box-shadow: none;
 }

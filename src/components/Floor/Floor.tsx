@@ -4,49 +4,65 @@ import './Floor.css';
 import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
-import Form from 'components/Form/Form';
+import Form from '../Form/Form';
 
 const START_DATA_DEFAULT = {
-  player1: 'player1',
-  player2: 'player2',
+  player1: 'name',
+  player2: 'name',
   size: '0x0',
 };
 const handleWidth = (size: string) => {
   switch (size) {
     case '5x5':
-      return '600px';
+      return '630px';
     case '4x4':
-      return '480px';
+      return '490px';
     default:
-      return '360px';
+      return '370px';
   }
 };
+
+const StyledCenteredDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 20px;
+`;
 
 const StyledFloorDiv = styled.div<{ size: string }>`
   display: flex;
   flex-wrap: wrap;
-  background-color: yellow;
   width: ${({ size = '3x3' }) => handleWidth(size)};
   height: ${({ size = '3x3' }) => handleWidth(size)};
 `;
 
-const Floor = ({ groundType = 'yellow', testMode = true }) => {
+const StyledLabel = styled.label`
+  font-size: 20px;
+  width: auto;
+  padding: 10px;
+  font-family: monospace;
+  text-align: center;
+`;
+
+const Floor = ({ groundType = '', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
   const [startData, setStartData] = useState(START_DATA_DEFAULT);
-  const [arr, setArr] = useState([]);
+  const [arr, setArr] = useState(testMode ? initArr() : []);
 
-  // function initArr() {
-  //   if (testMode) {
-  //     return [0, 1, 2, 3, 4, 5, 4, 3, 2];
-  //   }
-  //
-  //   const result = [];
-  //   const elements = startData.size.split('x').map((elm) => +elm);
-  //   for (let i = 0; i < elements[0] * elements[1]; i++) {
-  //     result.push(Math.floor(Math.random() * 3));
-  //   }
-  //   return result;
-  // }
+  /**
+   * Наполнение поля
+   * */
+  function initArr() {
+    if (testMode) {
+      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
+    }
+
+    const result = [];
+    const elements = startData.size.split('x').map((elm) => +elm);
+    for (let i = 0; i < elements[0] * elements[1]; i++) {
+      result.push(Math.floor(Math.random() * 3));
+    }
+    return result;
+  }
 
   // Publish to Score.tsx
   const publish = (eventName, data: { isLeft: boolean }) => {
@@ -54,6 +70,9 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     document.dispatchEvent(event);
   };
 
+  /**
+   * Ход игрока - обновление поля
+   * */
   const updateArr = (position: 'left' | 'right') => {
     if ((position === 'left' && !isLeft) || (position === 'right' && isLeft)) {
       alert(`Not your move`);
@@ -78,48 +97,50 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     return result;
   };
 
-  // const renderBoxes = () => {
-  //   const result = [];
-  //   for (let i = 0; i < arr.length; i++) {
-  //     result.push(<Box key={i} point={arr[i]} order={i} />);
-  //   }
-  //   return result;
-  // };
-
+  /**
+   * Перезагрузить поле для тех же игроков
+   * */
   const clean = () => {
-    setArr([]);
-    setStartData(START_DATA_DEFAULT);
+    setArr(initArr());
     setIsLeft(true);
   };
 
   return (
     <div className="buttonPanel" role="Panel">
-      <Form onStart={setStartData} onSize={setArr} />
+      <StyledCenteredDiv>
+        <Form onStart={setStartData} onSize={setArr} />
+      </StyledCenteredDiv>
       <Text
         text="Нажимай кнопки по очереди, пока один из кубиков не наберет 5 очков. Начинает Левый"
         size="medium"
       ></Text>
-      <div className="playerButton">
-        <Button
-          text={startData.player1}
-          type="eco"
-          onClick={() => setArr(updateArr('left'))}
-        ></Button>
-      </div>
-      <StyledFloorDiv size={startData.size}>
-        {arr.map((elm, i) => (
-          <Box key={i} point={arr[i]} order={i} />
-        ))}
-      </StyledFloorDiv>
-      <div className="playerButton">
-        <Button
-          text={startData.player2}
-          type="eco"
-          onClick={() => setArr(updateArr('right'))}
-        ></Button>
-      </div>
+
+      <StyledCenteredDiv>
+        <div className="playerButton">
+          <StyledLabel>{isLeft && 'Your move'}</StyledLabel>
+          <Button
+            text={startData.player1}
+            type="eco"
+            onClick={() => setArr(updateArr('left'))}
+          ></Button>
+        </div>
+        <StyledFloorDiv size={startData.size}>
+          {arr.map((elm, i) => (
+            <Box key={i} point={arr[i]} order={i} />
+          ))}
+        </StyledFloorDiv>
+        <div className="playerButton">
+          <StyledLabel>{!isLeft && 'Your move'}</StyledLabel>
+          <Button
+            text={startData.player2}
+            type="eco"
+            onClick={() => setArr(updateArr('right'))}
+          ></Button>
+        </div>
+      </StyledCenteredDiv>
+
       <div className="cleanButton">
-        <Button text="rebuild" type="blue" onClick={() => clean()}></Button>
+        <Button text="against" type="blue" onClick={() => clean()}></Button>
       </div>
     </div>
   );
