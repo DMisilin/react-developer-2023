@@ -4,3 +4,4 @@ webpack.config.ts
 jest.config.js
 coverage
 *test*
+mock

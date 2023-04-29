@@ -35,6 +35,29 @@ jobs:
         env:
           CI: false
 
+  test:
+    name: test
+    runs-on: ubuntu-22.04
+
+    strategy:
+      matrix:
+        node-version: [ 16.10 ]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install packages
+        run: npm ci
+
+      - name: Run test
+        run: npm run test
+
   chromatic-deployment:
     name: chromatic
     runs-on: ubuntu-latest
