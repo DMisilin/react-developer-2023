@@ -25,3 +25,6 @@ dist/*
 # Test coverage report
 test/coverage
 coverage
+
+# Storybook log
+build-storybook.log
