@@ -3,20 +3,35 @@ import './Floor.css';
 import Box from '../Box/Box';
 import Button from '../Button/Button';
 import Text from '../Text/Text';
+import Form from '../Form/Form';
+import {
+  StyledCenteredDiv,
+  StyledFloorDiv,
+  StyledLabel,
+} from '../styles/components';
 
-const ARR_LENGTH = 9;
+const START_DATA_DEFAULT = {
+  player1: 'name',
+  player2: 'name',
+  size: '0x0',
+};
 
-const Floor = ({ groundType = 'yellow', testMode = true }) => {
+const Floor = ({ groundType = '', testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
-  const [arr, setArr] = useState(initArr());
+  const [startData, setStartData] = useState(START_DATA_DEFAULT);
+  const [arr, setArr] = useState(testMode ? initArr() : []);
 
+  /**
+   * Наполнение поля
+   * */
   function initArr() {
     if (testMode) {
       return [0, 1, 2, 3, 4, 5, 4, 3, 2];
     }
 
     const result = [];
-    for (let i = 0; i < ARR_LENGTH; i++) {
+    const elements = startData.size.split('x').map((elm) => +elm);
+    for (let i = 0; i < elements[0] * elements[1]; i++) {
       result.push(Math.floor(Math.random() * 3));
     }
     return result;
@@ -28,6 +43,9 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     document.dispatchEvent(event);
   };
 
+  /**
+   * Ход игрока - обновление поля
+   * */
   const updateArr = (position: 'left' | 'right') => {
     if ((position === 'left' && !isLeft) || (position === 'right' && isLeft)) {
       alert(`Not your move`);
@@ -44,7 +62,7 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     setTimeout(() => {
       if (result.find((elm) => elm >= 5)) {
         publish('myEvent', { isLeft });
-        alert(`Player ${isLeft ? 'LEFT' : 'RIGHT'} win!`);
+        alert(`Player ${isLeft ? startData.player1 : startData.player2} win!`);
       }
     }, 100);
 
@@ -52,14 +70,9 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
     return result;
   };
 
-  const renderBoxes = () => {
-    const result = [];
-    for (let i = 0; i < arr.length; i++) {
-      result.push(<Box key={i} point={arr[i]} order={i} />);
-    }
-    return result;
-  };
-
+  /**
+   * Перезагрузить поле для тех же игроков
+   * */
   const clean = () => {
     setArr(initArr());
     setIsLeft(true);
@@ -67,27 +80,40 @@ const Floor = ({ groundType = 'yellow', testMode = true }) => {
 
   return (
     <div className="buttonPanel" role="Panel">
+      <StyledCenteredDiv>
+        <Form onStart={setStartData} onSize={setArr} />
+      </StyledCenteredDiv>
       <Text
         text="Нажимай кнопки по очереди, пока один из кубиков не наберет 5 очков. Начинает Левый"
         size="medium"
       ></Text>
-      <div className="playerButton">
-        <Button
-          text="left"
-          type="eco"
-          onClick={() => setArr(updateArr('left'))}
-        ></Button>
-      </div>
-      <div className={`floor ${groundType}`}>{renderBoxes()}</div>
-      <div className="playerButton">
-        <Button
-          text="right"
-          type="eco"
-          onClick={() => setArr(updateArr('right'))}
-        ></Button>
-      </div>
+
+      <StyledCenteredDiv>
+        <div className="playerButton">
+          <StyledLabel>{isLeft && 'Your move'}</StyledLabel>
+          <Button
+            text={startData.player1}
+            type="eco"
+            onClick={() => setArr(updateArr('left'))}
+          ></Button>
+        </div>
+        <StyledFloorDiv size={startData.size}>
+          {arr.map((elm, i) => (
+            <Box key={i} point={arr[i]} order={i} />
+          ))}
+        </StyledFloorDiv>
+        <div className="playerButton">
+          <StyledLabel>{!isLeft && 'Your move'}</StyledLabel>
+          <Button
+            text={startData.player2}
+            type="eco"
+            onClick={() => setArr(updateArr('right'))}
+          ></Button>
+        </div>
+      </StyledCenteredDiv>
+
       <div className="cleanButton">
-        <Button text="rebuild" type="blue" onClick={() => clean()}></Button>
+        <Button text="against" type="blue" onClick={() => clean()}></Button>
       </div>
     </div>
   );

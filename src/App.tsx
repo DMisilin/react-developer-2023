@@ -5,8 +5,8 @@ import { Score } from 'components/Score/Score';
 const App = () => {
   return (
     <>
-      <Floor groundType="yellow" testMode={false}></Floor>
-      <Score />
+      <Floor testMode={false}></Floor>
+      {/*<Score />*/}
     </>
   );
 };
