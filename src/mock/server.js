@@ -41,6 +41,17 @@ app.get('/update', (req, res) => {
   })
 })
 
+app.get('/rating', (req, res) => {
+  const rating = [];
+  for (let i = 0; i < 10; i++) {
+    rating.push({
+      name: getUser(),
+      points: Math.floor(Math.random() * 100),
+    });
+  }
+  res.send({ rating, errors: [] })
+})
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

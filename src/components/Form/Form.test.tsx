@@ -18,8 +18,8 @@ describe('Form element', () => {
     const labels = screen.getAllByRole('Label');
     const button = screen.getAllByText('Start');
 
-    expect(inputs.length).toBe(3);
-    expect(labels.length).toBe(4);
+    expect(inputs.length).toBe(5);
+    expect(labels.length).toBe(6);
     expect(button.length).toBe(1);
   });
 

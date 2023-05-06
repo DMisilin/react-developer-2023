@@ -1,45 +1,42 @@
 import React from 'react';
-import styled from 'styled-components';
 import {
   StyledInput,
   StyledLabel,
   StyledForm,
   StyledButton,
+  StyledP,
 } from '../styles/components';
-
-const StyledP = styled.p`
-  padding: 10px;
-  margin: 0;
-`;
+import { getRandomArray } from '../helper/methods';
 
 type StartDataType = {
   player1: string;
   player2: string;
   size: string;
-};
-
-const initArr = (length) => {
-  const result = [];
-  for (let i = 0; i < length; i++) {
-    result.push(Math.floor(Math.random() * 3));
-  }
-  return result;
+  fillings: number;
+  maxStartPoints: number;
 };
 
 const Form = ({ onStart, onSize }) => {
   const onSubmit = (event) => {
     event.preventDefault();
-    const { player1, player2, myRadio } = event.target.elements;
+    const { player1, player2, myRadio, fillings, maxStartPoints } =
+      event.target.elements;
     const data: StartDataType = {
       player1: player1.value,
       player2: player2.value,
       size: myRadio.value,
+      fillings: fillings.value,
+      maxStartPoints: maxStartPoints.value,
     };
     console.log(data);
     onStart(data);
 
     const elements = myRadio.value.split('x').map((elm) => +elm);
-    const newArr = initArr(elements[0] * elements[1]);
+    const newArr = getRandomArray(
+      elements[0] * elements[1],
+      +data.fillings,
+      +data.maxStartPoints,
+    );
     onSize(newArr);
   };
 
@@ -51,6 +48,14 @@ const Form = ({ onStart, onSize }) => {
         </StyledLabel>
         <StyledLabel role="Label">
           player 2: <StyledInput name="player2" defaultValue="player2" />
+        </StyledLabel>
+        <StyledLabel role="Label">
+          fillings %:{' '}
+          <StyledInput name="fillings" defaultValue="50" role="Input" />
+        </StyledLabel>
+        <StyledLabel role="Label">
+          Max start points:{' '}
+          <StyledInput name="maxStartPoints" defaultValue="2" role="Input" />
         </StyledLabel>
         <StyledP>
           Size:
@@ -73,9 +78,7 @@ const Form = ({ onStart, onSize }) => {
             5x5
           </StyledLabel>
         </StyledP>
-        <StyledButton type="submit">
-          Start
-        </StyledButton>
+        <StyledButton type="submit">Start</StyledButton>
       </StyledForm>
     </>
   );

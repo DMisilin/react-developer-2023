@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+const handleWidth = (size: string) => {
+  switch (size) {
+    case '5x5':
+      return '630px';
+    case '4x4':
+      return '490px';
+    default:
+      return '370px';
+  }
+};
+
 export const StyledInput = styled.input`
   margin: 5px;
   font-size: 20px;
@@ -20,7 +31,7 @@ export const StyledForm = styled.form`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 400px;
-  height: 250px;
+  height: 350px;
   background-color: #e1eedd;
   border-radius: 4px;
 `;
@@ -57,20 +68,14 @@ export const StyledCenteredDiv = styled.div`
   margin: 20px;
 `;
 
-const handleWidth = (size: string) => {
-  switch (size) {
-    case '5x5':
-      return '630px';
-    case '4x4':
-      return '490px';
-    default:
-      return '370px';
-  }
-};
-
 export const StyledFloorDiv = styled.div<{ size: string }>`
   display: flex;
   flex-wrap: wrap;
   width: ${({ size = '3x3' }) => handleWidth(size)};
   height: ${({ size = '3x3' }) => handleWidth(size)};
+`;
+
+export const StyledP = styled.p`
+  padding: 10px;
+  margin: 0;
 `;

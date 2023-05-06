@@ -9,33 +9,21 @@ import {
   StyledFloorDiv,
   StyledLabel,
 } from '../styles/components';
+import { getRandomArray } from '../helper/methods';
 
 const START_DATA_DEFAULT = {
   player1: 'name',
   player2: 'name',
   size: '0x0',
+  fillings: 50,
+  maxStartPoints: 2,
 };
+const TEST_ARRAY = [0, 1, 2, 3, 4, 5, 4, 3, 2];
 
-const Floor = ({ groundType = '', testMode = true }) => {
+const Floor = ({ testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
   const [startData, setStartData] = useState(START_DATA_DEFAULT);
-  const [arr, setArr] = useState(testMode ? initArr() : []);
-
-  /**
-   * Наполнение поля
-   * */
-  function initArr() {
-    if (testMode) {
-      return [0, 1, 2, 3, 4, 5, 4, 3, 2];
-    }
-
-    const result = [];
-    const elements = startData.size.split('x').map((elm) => +elm);
-    for (let i = 0; i < elements[0] * elements[1]; i++) {
-      result.push(Math.floor(Math.random() * 3));
-    }
-    return result;
-  }
+  const [arr, setArr] = useState(testMode ? TEST_ARRAY : []);
 
   // Publish to Score.tsx
   const publish = (eventName, data: { isLeft: boolean }) => {
@@ -74,7 +62,14 @@ const Floor = ({ groundType = '', testMode = true }) => {
    * Перезагрузить поле для тех же игроков
    * */
   const clean = () => {
-    setArr(initArr());
+    const elements = startData.size.split('x').map((elm) => +elm);
+    const newArray = getRandomArray(
+      elements[0] * elements[1],
+      +startData.fillings,
+      +startData.maxStartPoints,
+    );
+
+    setArr(newArray);
     setIsLeft(true);
   };
 
