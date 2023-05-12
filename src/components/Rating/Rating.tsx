@@ -8,7 +8,8 @@ const TEST_RATING = [
 ];
 
 const Rating = ({ rating, testMode = true }) => {
-  const list = testMode ? TEST_RATING : rating;
+  // !rating.length для gh-pages
+  const list = testMode || !rating.length ? TEST_RATING : rating;
 
   return (
     <>
