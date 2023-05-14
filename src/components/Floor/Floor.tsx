@@ -26,7 +26,7 @@ export const Floor = ({ testMode = true }) => {
   const [exit, setExit] = useState(false);
   const [startData, setStartData] = useState(START_DATA_DEFAULT);
   const [arr, setArr] = useState(testMode ? TEST_ARRAY : []);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
 
   // Publish to Score.tsx
   const publish = (eventName, data: { isLeft: boolean }) => {
