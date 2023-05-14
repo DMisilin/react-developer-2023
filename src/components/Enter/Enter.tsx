@@ -29,7 +29,7 @@ export const Enter: FC = () => {
         </StyledEnterForm>
       </div>
 
-      <div>{entered && <Navigate to="/game" replace={true} />}</div>
+      <div>{entered && <Navigate to="game" replace={true} />}</div>
     </>
   );
 };
