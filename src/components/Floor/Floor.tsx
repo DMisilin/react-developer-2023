@@ -53,7 +53,11 @@ export const Floor = ({ testMode = true }) => {
     setTimeout(() => {
       if (result.find((elm) => elm >= 5)) {
         publish('myEvent', { isLeft });
-        alert(`Player ${isLeft ? startData.player1 : startData.player2} win!`);
+        alert(
+          `Player ${
+            isLeft ? searchParams.get('player1') : searchParams.get('player2')
+          } win!`,
+        );
       }
     }, 100);
 
@@ -95,7 +99,7 @@ export const Floor = ({ testMode = true }) => {
         <div className="playerButton">
           <StyledLabel>{isLeft && 'Your move'}</StyledLabel>
           <Button
-            text={startData.player1}
+            text={searchParams.get('player1')}
             type="eco"
             onClick={() => setArr(updateArr('left'))}
           ></Button>
@@ -108,7 +112,7 @@ export const Floor = ({ testMode = true }) => {
         <div className="playerButton">
           <StyledLabel>{!isLeft && 'Your move'}</StyledLabel>
           <Button
-            text={startData.player2}
+            text={searchParams.get('player2')}
             type="eco"
             onClick={() => setArr(updateArr('right'))}
           ></Button>

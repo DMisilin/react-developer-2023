@@ -6,11 +6,11 @@ import {
   StyledEnterForm,
   StyledInput,
   StyledLabel,
-} from 'components/styles/components';
+} from '../styles/components';
 
 export const Enter: FC = () => {
   const [entered, setEntered] = useState(false);
-  const onSubmit = (event) => {
+  const onSubmit = () => {
     setEntered(true);
   };
 
