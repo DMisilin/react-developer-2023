@@ -31,7 +31,7 @@ export const StyledForm = styled.form`
   justify-content: space-around;
   flex-wrap: wrap;
   width: 400px;
-  height: 350px;
+  height: 250px;
   background-color: #e1eedd;
   border-radius: 4px;
 `;
@@ -78,4 +78,15 @@ export const StyledFloorDiv = styled.div<{ size: string }>`
 export const StyledP = styled.p`
   padding: 10px;
   margin: 0;
+`;
+
+export const StyledEnterForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 400px;
+  height: 150px;
+  background-color: #e1eedd;
+  border-radius: 4px;
 `;

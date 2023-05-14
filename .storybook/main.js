@@ -23,6 +23,7 @@ module.exports = {
     '@storybook/addon-toolbars',
     '@storybook/addon-measure',
     '@storybook/addon-outline',
+    'storybook-addon-react-router-v6',
   ],
   "framework": "@storybook/react",
   "core": {

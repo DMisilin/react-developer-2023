@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import Floor from './Floor';
+import { Floor } from './Floor';
 
 describe('Floor element', () => {
   test('Floor rendering', () => {
@@ -15,7 +15,7 @@ describe('Floor element', () => {
     const boxes = screen.getAllByRole('Box');
     const form = screen.getAllByRole('Form');
 
-    expect(buttons.length).toBe(4);
+    expect(buttons.length).toBe(5);
     expect(boxes.length).toBe(9);
     expect(boxes.length).toBe(9);
     expect(form.length).toBe(1);

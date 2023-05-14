@@ -1,13 +1,15 @@
 import React from 'react';
-import Floor from 'components/Floor/Floor';
+import { Floor } from 'components/Floor';
 import { Score } from 'components/Score/Score';
 import Container from 'components/Container/Container';
+import { Navigation } from 'src/navigation';
 
 const App = () => {
   return (
     <>
-      <Floor testMode={false}></Floor>
-      <Container></Container>
+      <Navigation />
+      {/*<Floor testMode={false}></Floor>*/}
+      {/*<Container></Container>*/}
       {/*<Score />*/}
     </>
   );
