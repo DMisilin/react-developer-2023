@@ -1,4 +1,4 @@
-name: radar CI
+name: react-dev-2023 CI
 
 on:
   push:
