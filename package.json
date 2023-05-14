@@ -1,5 +1,5 @@
 {
-  "name": "react-developer-2023",
+  "name": "react-developer-2023__test",
   "version": "1.0.0",
   "description": "Repository for OTUS react developer",
   "main": "index.js",
@@ -26,7 +26,7 @@
   "bugs": {
     "url": "https://github.com/DMisilin/react-developer-2023/issues"
   },
-  "homepage": "https://github.com/DMisilin/react-developer-2023",
+  "homepage": "https://github.com/DMisilin",
   "dependencies": {
     "ajv": "^8.12.0",
     "cross-env": "^7.0.3",
