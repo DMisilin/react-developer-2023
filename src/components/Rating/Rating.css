@@ -1,0 +1,22 @@
+.rating {
+    position: absolute;
+    top: 25px;
+    left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 5px;
+    width: 300px;
+    background: rgb(225, 238, 221);
+    border: rgb(249, 205, 11) 2px solid;
+}
+
+.rating-raw {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-family: monospace;
+    font-size: 18px;
+    color: #39395f;
+}
