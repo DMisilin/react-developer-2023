@@ -128,7 +128,7 @@ Components lifecycle. Списки, события, формы
 
 ------
 
-### Lesson 18
+### Lesson 19
 
 ```text
 React router
@@ -150,7 +150,7 @@ React router
 ```
 
 #### start
-`npm run dev:server`
+`npm run dev`
 
 #### test
 `npm run test`
