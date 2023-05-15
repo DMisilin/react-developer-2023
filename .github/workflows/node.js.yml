@@ -62,6 +62,10 @@ jobs:
     name: chromatic
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: [ 16.10 ]
+
     steps:
       - uses: actions/checkout@v1
 
