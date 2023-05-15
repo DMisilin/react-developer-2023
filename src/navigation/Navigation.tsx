@@ -5,7 +5,7 @@ import { Floor } from 'components/Floor/Floor';
 import { NotFound } from 'components/NotFound/NotFound';
 
 export const Navigation: FC = () => (
-  <BrowserRouter>
+  <BrowserRouter basename="react-developer-2023">
     <Routes>
       <Route path="/" element={<Enter />} />
       <Route path="/game" element={<Floor testMode={false} />} />
