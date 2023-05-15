@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
 const {TsconfigPathsPlugin} = require("tsconfig-paths-webpack-plugin");
 
 const port = 3030;
+const dist = path.join(__dirname, 'dist');
 const host = 'localhost';
 
 module.exports = {
@@ -16,8 +17,10 @@ module.exports = {
         plugins: [new TsconfigPathsPlugin()]
     },
     output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "build.js"
+        path: dist,
+        publicPath: `http://${host}:${port}/`,
+        filename: `js/[name].js`,
+        chunkFilename: `js/[name].js`,
     },
     devServer: {
         port,
