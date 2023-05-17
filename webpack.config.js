@@ -22,12 +22,6 @@ module.exports = {
         filename: `js/[name].js`,
         chunkFilename: `js/[name].js`,
     },
-    devServer: {
-        port,
-        hot: true,
-        historyApiFallback: true,
-        host,
-    },
     devtool: 'source-map',
     module: {
         rules: [
