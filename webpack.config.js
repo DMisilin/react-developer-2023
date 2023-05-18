@@ -18,7 +18,6 @@ module.exports = {
     },
     output: {
         path: dist,
-        publicPath: `http://${host}:${port}/`,
         filename: `js/[name].js`,
         chunkFilename: `js/[name].js`,
     },
