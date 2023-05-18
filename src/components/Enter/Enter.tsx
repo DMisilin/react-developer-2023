@@ -9,6 +9,7 @@ import {
 } from '../styles/components';
 
 export const Enter: FC = () => {
+  console.log('lo_ol_line_12--> : ');
   const [entered, setEntered] = useState(false);
   const onSubmit = () => {
     setEntered(true);

@@ -18,7 +18,7 @@ module.exports = {
     },
     output: {
         path: dist,
-        publicPath: `https://dmisilin.github.io/`,
+        publicPath: `https://dmisilin.github.io/react-developer-2023/`,
         filename: `js/[name].js`,
         chunkFilename: `js/[name].js`,
     },
