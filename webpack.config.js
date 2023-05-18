@@ -18,7 +18,7 @@ module.exports = {
     },
     output: {
         path: dist,
-        publicPath: `https://dmisilin.github.io/`,
+        publicPath: `auto`,
         filename: `js/[name].js`,
         chunkFilename: `js/[name].js`,
     },
