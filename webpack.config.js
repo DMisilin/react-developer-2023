@@ -20,12 +20,6 @@ module.exports = {
         filename: "build.js",
         publicPath: `https://dmisilin.github.io/react-developer-2023/`,
     },
-    devServer: {
-        port,
-        hot: true,
-        historyApiFallback: true,
-        host,
-    },
     devtool: 'source-map',
     module: {
         rules: [

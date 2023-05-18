@@ -13,6 +13,7 @@ export const Enter: FC = () => {
   const onSubmit = () => {
     setEntered(true);
   };
+  console.log('lo_ol_line_16--> : ');
 
   return (
     <>
