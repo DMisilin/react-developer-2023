@@ -1,21 +1,34 @@
-import path from "path";
-import webpack, {Configuration} from "webpack";
-import HtmlWebpackPlugin from "html-webpack-plugin";
-import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
-import {TsconfigPathsPlugin} from "tsconfig-paths-webpack-plugin";
+const path = require("path");
+const webpack = require("webpack");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const ForkTsCheckerWebpackPlugin = require("fork-ts-checker-webpack-plugin");
+const {TsconfigPathsPlugin} = require("tsconfig-paths-webpack-plugin");
 
-const webpackConfig = (env): Configuration => ({
+const port = 3030;
+const dist = path.join(__dirname, 'dist');
+const host = 'localhost';
+
+module.exports = {
     entry: "./src/index.tsx",
-    ...(env.production || !env.development ? {} : {devtool: "eval-source-map"}),
+    mode: 'development',
     resolve: {
         extensions: [".ts", ".tsx", ".js"],
         //@ts-ignore
         plugins: [new TsconfigPathsPlugin()]
     },
     output: {
-        path: path.join(__dirname, "/dist"),
-        filename: "build.js"
+        path: dist,
+        publicPath: `http://${host}:${port}/`,
+        filename: `js/[name].js`,
+        chunkFilename: `js/[name].js`,
     },
+    devServer: {
+        port,
+        hot: true,
+        historyApiFallback: true,
+        host,
+    },
+    devtool: 'source-map',
     module: {
         rules: [
             {
@@ -38,12 +51,9 @@ const webpackConfig = (env): Configuration => ({
             template: "./public/index.html"
         }),
         new webpack.DefinePlugin({
-            "process.env.PRODUCTION": env.production || !env.development,
             "process.env.NAME": JSON.stringify(require("./package.json").name),
             "process.env.VERSION": JSON.stringify(require("./package.json").version)
         }),
         new ForkTsCheckerWebpackPlugin()
     ],
-});
-
-export default webpackConfig;
+};

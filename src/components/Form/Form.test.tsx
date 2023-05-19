@@ -19,7 +19,7 @@ describe('Form element', () => {
     const button = screen.getAllByText('Start');
 
     expect(inputs.length).toBe(5);
-    expect(labels.length).toBe(6);
+    expect(labels.length).toBe(4);
     expect(button.length).toBe(1);
   });
 

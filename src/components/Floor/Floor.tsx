@@ -10,6 +10,7 @@ import {
   StyledLabel,
 } from '../styles/components';
 import { getRandomArray } from '../helper/methods';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 const START_DATA_DEFAULT = {
   player1: 'name',
@@ -20,10 +21,12 @@ const START_DATA_DEFAULT = {
 };
 const TEST_ARRAY = [0, 1, 2, 3, 4, 5, 4, 3, 2];
 
-const Floor = ({ testMode = true }) => {
+export const Floor = ({ testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
+  const [exit, setExit] = useState(false);
   const [startData, setStartData] = useState(START_DATA_DEFAULT);
   const [arr, setArr] = useState(testMode ? TEST_ARRAY : []);
+  const [searchParams] = useSearchParams();
 
   // Publish to Score.tsx
   const publish = (eventName, data: { isLeft: boolean }) => {
@@ -50,7 +53,11 @@ const Floor = ({ testMode = true }) => {
     setTimeout(() => {
       if (result.find((elm) => elm >= 5)) {
         publish('myEvent', { isLeft });
-        alert(`Player ${isLeft ? startData.player1 : startData.player2} win!`);
+        alert(
+          `Player ${
+            isLeft ? searchParams.get('player1') : searchParams.get('player2')
+          } win!`,
+        );
       }
     }, 100);
 
@@ -73,6 +80,11 @@ const Floor = ({ testMode = true }) => {
     setIsLeft(true);
   };
 
+  /**
+   * Выход из игры
+   * */
+  const toExit = () => setExit(true);
+
   return (
     <div className="buttonPanel" role="Panel">
       <StyledCenteredDiv>
@@ -87,7 +99,7 @@ const Floor = ({ testMode = true }) => {
         <div className="playerButton">
           <StyledLabel>{isLeft && 'Your move'}</StyledLabel>
           <Button
-            text={startData.player1}
+            text={searchParams.get('player1')}
             type="eco"
             onClick={() => setArr(updateArr('left'))}
           ></Button>
@@ -100,7 +112,7 @@ const Floor = ({ testMode = true }) => {
         <div className="playerButton">
           <StyledLabel>{!isLeft && 'Your move'}</StyledLabel>
           <Button
-            text={startData.player2}
+            text={searchParams.get('player2')}
             type="eco"
             onClick={() => setArr(updateArr('right'))}
           ></Button>
@@ -108,10 +120,11 @@ const Floor = ({ testMode = true }) => {
       </StyledCenteredDiv>
 
       <div className="cleanButton">
-        <Button text="against" type="blue" onClick={() => clean()}></Button>
+        <Button text="against" type="eco" onClick={() => clean()}></Button>
+        <Button text="exit" type="blue" onClick={() => toExit()}></Button>
       </div>
+
+      <div>{exit && <Navigate to="/" replace={true} />}</div>
     </div>
   );
 };
-
-export default Floor;

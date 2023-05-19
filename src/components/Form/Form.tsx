@@ -9,8 +9,6 @@ import {
 import { getRandomArray } from '../helper/methods';
 
 type StartDataType = {
-  player1: string;
-  player2: string;
   size: string;
   fillings: number;
   maxStartPoints: number;
@@ -19,11 +17,9 @@ type StartDataType = {
 const Form = ({ onStart, onSize }) => {
   const onSubmit = (event) => {
     event.preventDefault();
-    const { player1, player2, myRadio, fillings, maxStartPoints } =
+    const { myRadio, fillings, maxStartPoints } =
       event.target.elements;
     const data: StartDataType = {
-      player1: player1.value,
-      player2: player2.value,
       size: myRadio.value,
       fillings: fillings.value,
       maxStartPoints: maxStartPoints.value,
@@ -43,12 +39,6 @@ const Form = ({ onStart, onSize }) => {
   return (
     <>
       <StyledForm onSubmit={onSubmit} role="Form">
-        <StyledLabel role="Label">
-          player 1: <StyledInput name="player1" defaultValue="player1" />
-        </StyledLabel>
-        <StyledLabel role="Label">
-          player 2: <StyledInput name="player2" defaultValue="player2" />
-        </StyledLabel>
         <StyledLabel role="Label">
           fillings %:{' '}
           <StyledInput name="fillings" defaultValue="50" role="Input" />
