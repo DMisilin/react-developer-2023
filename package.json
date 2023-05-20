@@ -15,7 +15,8 @@
     "chromatic": "npx chromatic --project-token=$CHROMATIC_PROJECT_TOKEN --force-rebuild",
     "mock-server": "node src/mock/server.js",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "test:20": "jest  --testPathPattern=src/lesson-20/*"
   },
   "repository": {
     "type": "git",
