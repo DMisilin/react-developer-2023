@@ -15,6 +15,7 @@ test("compose max name", () => {
   ];
 
   const composedActions = composeTeam(teamName, getTopTeam);
+  // @ts-ignore
   expect(composedActions(teams)).toBe('Bears');
 });
 
