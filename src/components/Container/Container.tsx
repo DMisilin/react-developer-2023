@@ -17,7 +17,7 @@ const Container = () => {
 
   return (
     <>
-      <Rating rating={list} testMode={false}></Rating>
+      <Rating testMode={false}></Rating>
     </>
   );
 };
