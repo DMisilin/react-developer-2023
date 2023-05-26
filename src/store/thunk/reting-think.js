@@ -1,5 +1,6 @@
 import axios from 'axios';
 const RATING_URL = 'https://pokeapi.co/api/v2/pokemon?offset=20&limit=50';
+const TEST_URL = 'https://pokeapi.co/api/v2/pokemon/45/';
 
 export const getRatingThunk = () => async (dispatch) => {
   dispatch({ type: 'LOADING_LIST', payload: 'loading' });
@@ -24,7 +25,7 @@ export const getInfoThunk = (url) => async (dispatch) => {
   dispatch({ type: 'LOADING_INFO', payload: 'loading' });
 
   try {
-    const { data } = await axios.get(url, {
+    const { data } = await axios.get(url || TEST_URL, {
       headers: { 'Content-Type': 'application/json' },
     });
     console.log('Info: ', data);
