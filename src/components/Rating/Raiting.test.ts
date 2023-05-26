@@ -4,25 +4,38 @@ import moxios from 'moxios';
 import { getRatingThunk } from '../../store/thunk/reting-think';
 
 const mockStore = configureMockStore([thunk]);
-const TEST_LIST = [
-  { name: 'User 1' },
-  { name: 'User 2' },
-  { name: 'User 3' },
-  { name: 'User 3' },
-];
+const TEST_LIST = Array(50).fill({ name: 'test', weight: 1, height: 2, abilities: [{ability: {name: 'ability'}}] });
 let store;
 
 describe('Test Post Actions', () => {
   beforeEach(() => {
     moxios.install();
     store = mockStore({
-      loading: false,
+      loadingList: false,
+      loadingInfo: false,
       ratingList: [],
-      error: null,
+      info: {
+        name: 'no',
+        weight: 0,
+        height: 0,
+        abilities: [],
+      },
+      errorList: null,
+      errorInfo: null,
     });
   });
   afterEach(() => {
     moxios.uninstall();
+  });
+
+  it('Starting state', async () => {
+    const state = store.getState();
+    expect(state.loadingList).toBe(false);
+    expect(state.loadingInfo).toBe(false);
+    expect(state.ratingList).toEqual([]);
+    expect(state.info).toEqual({ name: 'no', weight: 0, height: 0, abilities: [] });
+    expect(state.errorList).toBeNull();
+    expect(state.errorInfo).toBeNull();
   });
 
   it('Check actions contains before and after thunk', async () => {
@@ -43,8 +56,8 @@ describe('Test Post Actions', () => {
 
     actions = store.getActions();
     expect(actions.length).toBe(2);
-    expect(actions.find(elm => elm.type === 'LOADING')).not.toBeUndefined();
-    expect(actions.find(elm => elm.type === 'GET_RATING')).not.toBeUndefined();
+    expect(actions.find(elm => elm.type === 'LOADING_LIST')).not.toBeUndefined();
+    expect(actions.find(elm => elm.type === 'GET_LIST')).not.toBeUndefined();
   });
 
   it('Check actions payloads', async () => {
@@ -61,17 +74,10 @@ describe('Test Post Actions', () => {
     await store.dispatch(getRatingThunk());
 
     const actions = store.getActions();
-    const loading = actions.find(elm => elm.type === 'LOADING');
-    const rating = actions.find(elm => elm.type === 'GET_RATING');
-
+    const loading = actions.find(elm => elm.type === 'LOADING_LIST');
+    const rating = actions.find(elm => elm.type === 'GET_LIST');
+    
     expect(loading.payload).toBe('loading');
-    expect(rating.payload).toEqual(TEST_LIST);
-  });
-
-  it('Starting state', async () => {
-    const state = store.getState();
-    expect(state.loading).toBe(false);
-    expect(state.ratingList).toEqual([]);
-    expect(state.error).toBeNull();
+    expect(rating.payload.length).toEqual(10);
   });
 });

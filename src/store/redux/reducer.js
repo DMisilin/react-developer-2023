@@ -1,31 +1,59 @@
 const initialState = {
-  loading: false,
+  loadingList: false,
+  loadingInfo: false,
   ratingList: [],
-  error: null,
+  info: {
+    name: 'no',
+    weight: 0,
+    height: 0,
+    abilities: [],
+  },
+  errorList: null,
+  errorInfo: null,
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case 'LOADING': {
+    case 'LOADING_LIST': {
       return {
         ...state,
-        error: null,
-        loading: true,
+        loadingList: true,
+        errorList: null,
       };
     }
-    case 'GET_RATING': {
+    case 'GET_LIST': {
       return {
         ...state,
         ratingList: action.payload,
-        loading: false,
-        error: null,
+        loadingList: false,
+        errorList: null,
       };
     }
-    case 'FETCH_ERROR': {
+    case 'LIST_ERROR': {
       return {
         ...state,
-        loading: false,
-        error: action.payload.message,
+        errorList: action.payload.message,
+      };
+    }
+    case 'LOADING_INFO': {
+      return {
+        ...state,
+        loadingInfo: true,
+        errorInfo: null,
+      };
+    }
+    case 'GET_INFO': {
+      return {
+        ...state,
+        info: action.payload,
+        loadingInfo: false,
+        errorInfo: null,
+      };
+    }
+    case 'INFO_ERROR': {
+      return {
+        ...state,
+        errorInfo: action.payload.message,
       };
     }
     default:

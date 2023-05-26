@@ -1,58 +1,77 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
-import { getRatingThunk } from 'src/store/thunk/reting-think.js';
-import { AnyAction } from 'redux';
-
-const TEST_RATING = [
-  { name: 'User 1', points: 10 },
-  { name: 'User 2', points: 20 },
-  { name: 'User 3', points: 130 },
-];
+import { getInfoThunk, getRatingThunk } from 'src/store/thunk/reting-think.js';
+import Button from 'components/Button/Button';
 
 type State = {
-  loading: boolean;
-  ratingList: object[];
-  error: string | null;
+  loadingList: false;
+  loadingInfo: false;
+  ratingList: [];
+  info: { name: string; weight: number; height: number; abilities: string[] };
+  errorList: null;
+  errorInfo: null;
 };
 
 const Rating = ({ testMode = true }) => {
   const dispatch = useDispatch();
-  const { loading, ratingList, error } = useSelector((state: State) => state);
+  const { loadingList, loadingInfo, ratingList, info, errorList, errorInfo } =
+    useSelector((state: State) => state);
 
   useEffect(() => {
     // @ts-ignore
     dispatch(getRatingThunk());
   }, []);
 
-  let list = [];
-  if (testMode) {
-    list = TEST_RATING;
-  } else {
-    list = ratingList;
-  }
   const click = () => {
-    dispatch({ type: 'LOADING' });
+    dispatch({ type: 'LOADING_LIST' });
     // @ts-ignore
     dispatch(getRatingThunk());
   };
 
+  const getInfo = (params) => {
+    dispatch({ type: 'LOADING_INFO' });
+    // @ts-ignore
+    dispatch(getInfoThunk(params));
+  };
+
   return (
-    <div>
-      <div>
-        {!loading && !error && (
+    <div className="rating-container">
+      <div className="rating-block">
+        <Button text="refresh" type="blue" onClick={click} />
+      </div>
+
+      <div className="rating-block">
+        <div>{errorList && <div>{JSON.stringify(errorList)}</div>}</div>
+        {loadingList ? <div>LOADING...</div> : (
           <div role="Rating" className="rating">
-            {list.map(({ name, points }, i) => (
-              <div key={i} role="RatingRaw" className="rating-raw">{`${
-                i + 1
-              } ${name} - ${Math.floor(Math.random() * 100)} pt`}</div>
+            {ratingList.map(({ name, url }, i) => (
+              <div key={url} className="line">
+                <Button text="info" type="eco" onClick={() => getInfo(url)} />
+                <div role="RatingRaw" className="rating-raw">{`${
+                  i + 1
+                } ${name}`}</div>
+              </div>
             ))}
           </div>
         )}
       </div>
-      <div>{loading && <div>LOADING...</div>}</div>
-      <div>{error && <div>{JSON.stringify(error)}</div>}</div>
-      <button onClick={click}>Refresh</button>
+
+      <div className="rating-block">
+        <div>{errorInfo && <div>{JSON.stringify(errorInfo)}</div>}</div>
+        <div className="info">
+          {loadingInfo ? (
+            <div>LOADING...</div>
+          ) : (
+            <>
+              <div>{`name: ${info.name}`}</div>
+              <div>{`weight: ${info.height}`}</div>
+              <div>{`height: ${info.height}`}</div>
+              <div>{`abilities: ${JSON.stringify(info.abilities)}`}</div>
+            </>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
