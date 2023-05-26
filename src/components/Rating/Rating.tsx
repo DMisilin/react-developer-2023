@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
 import { getRatingThunk } from 'src/store/thunk/reting-think.js';
+import { AnyAction } from 'redux';
 
 const TEST_RATING = [
   { name: 'User 1', points: 10 },
@@ -44,7 +45,7 @@ const Rating = ({ testMode = true }) => {
             {list.map(({ name, points }, i) => (
               <div key={i} role="RatingRaw" className="rating-raw">{`${
                 i + 1
-              } ${name} - ${points} pt`}</div>
+              } ${name} - ${Math.floor(Math.random() * 100)} pt`}</div>
             ))}
           </div>
         )}

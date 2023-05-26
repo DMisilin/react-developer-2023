@@ -1,20 +1,17 @@
-const RATING_URL = 'http://localhost:3999/rating';
+import axios from 'axios';
+const RATING_URL = 'https://pokeapi.co/api/v2/pokemon';
 
-export const getRatingThunk = () => (dispatch) => {
+export const getRatingThunk = () => async (dispatch) => {
   dispatch({ type: 'LOADING', payload: 'loading' });
 
-  fetch(RATING_URL)
-    .then((response) => response.json())
-    .then(({ rating }) => {
-      console.log('Rating was gow: ', rating);
-      dispatch({ type: 'GET_RATING', payload: rating });
-    })
-    .catch((error) => {
-      console.error('FETCH ERROR::', error);
-      dispatch({ type: 'FETCH_ERROR', payload: error });
+  try {
+    const { data } = await axios.get(RATING_URL, {
+      headers: { 'Content-Type': 'application/json' },
     });
-
-  // instance(params)
-  //   .then((json) => dispatch({ type: 'GET_POKEMONE_TYPE', payload: json.data }))
-  //   .catch((error) => dispatch({ type: 'FETCH_ERROR', payload: error }));
+    console.log('Rating was gow: ', data);
+    dispatch({ type: 'GET_RATING', payload: data.results });
+  } catch (error) {
+    console.error('FETCH ERROR::', error);
+    dispatch({ type: 'FETCH_ERROR', payload: error });
+  }
 };

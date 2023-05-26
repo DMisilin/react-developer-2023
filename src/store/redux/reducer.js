@@ -25,7 +25,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        error: action.payload.stack,
+        error: action.payload.message,
       };
     }
     default:
