@@ -90,3 +90,14 @@ export const StyledEnterForm = styled.form`
   background-color: #e1eedd;
   border-radius: 4px;
 `;
+
+export const StyledAuthForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  width: 400px;
+  height: 150px;
+  background-color: dimgrey;
+  border-radius: 4px;
+`;

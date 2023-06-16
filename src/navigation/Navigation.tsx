@@ -1,13 +1,15 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Enter } from 'components/Enter';
+import { Auth } from 'components/Auth';
 import { Floor } from 'components/Floor/Floor';
 import { NotFound } from 'components/NotFound/NotFound';
 
 export const Navigation: FC = () => (
-  <BrowserRouter basename="react-developer-2023">
+  <BrowserRouter basename="">
     <Routes>
-      <Route path="/" element={<Enter />} />
+      <Route path="/" element={<Auth />} />
+      <Route path="/enter" element={<Enter />} />
       <Route path="/game" element={<Floor testMode={false} />} />
       <Route path="*" element={<NotFound />} />
     </Routes>

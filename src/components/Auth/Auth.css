@@ -1,0 +1,19 @@
+.enter {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.enter-title {
+    font-family: monospace;
+    font-size: 22px;
+    color: #2b6777;
+    margin: 5px;
+}
+
+.errors {
+    display: flex;
+    justify-content: center;
+    color: red;
+}
