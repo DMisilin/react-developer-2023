@@ -12,7 +12,7 @@ export function* authUser(action: ActionType = null) {
   console.log('authSaga was started: ');
   const { user, errors: userErrors } = yield call(getUser, action);
 
-  if (userErrors.length) {
+  if (userErrors && userErrors.length) {
     yield put({ type: USER_AUTH_ERROR, user: {}, errors: userErrors });
   } else {
     console.log('User: ', user);

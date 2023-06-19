@@ -7,7 +7,7 @@ export const getUser = (
   action: ActionType,
 ): { user: UserType | null; errors: MyErrorType[] } => {
   // Ответ для тестирования
-  if (action) {
+  if (action.user || action.errors) {
     return {
       user: action.user || null,
       errors: action.errors || null,
