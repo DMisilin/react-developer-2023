@@ -98,7 +98,7 @@ describe('Test Post Actions', () => {
     let actions = store.getActions();
     expect(actions.length).toBe(0);
 
-    await store.dispatch(getInfoThunk());
+    await store.dispatch(getInfoThunk('url'));
 
     actions = store.getActions();
     expect(actions.length).toBe(2);
@@ -123,15 +123,12 @@ describe('Test Post Actions', () => {
       });
     });
 
-    await store.dispatch(getInfoThunk());
+    await store.dispatch(getInfoThunk('url_1'));
 
     const actions = store.getActions();
     const loading = actions.find(elm => elm.type === 'LOADING_INFO');
     const rating = actions.find(elm => elm.type === 'GET_INFO');
     
-    console.log('lo_ol_line_134--> loading: ', loading);
-    console.log('lo_ol_line_135--> rating: ', rating);
-
     expect(loading.payload).toBe('loading');
     expect(rating.payload).toEqual({
       name: 'test 2',

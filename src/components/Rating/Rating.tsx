@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
-import { getInfoThunk, getRatingThunk } from 'src/store/thunk/reting-think.js';
+import { getInfoThunk, getRatingThunk } from 'src/store/thunk/reting-think';
 import Button from 'components/Button/Button';
 
 type State = {

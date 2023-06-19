@@ -1,3 +1,19 @@
+type InfoType = {
+  name: string;
+  weight: number;
+  height: number;
+  abilities: string[];
+};
+
+type InitialStoreType = {
+  loadingList: boolean;
+  loadingInfo: boolean;
+  ratingList: string[];
+  info: InfoType;
+  errorList: null;
+  errorInfo: null;
+};
+
 const initialState = {
   loadingList: false,
   loadingInfo: false,

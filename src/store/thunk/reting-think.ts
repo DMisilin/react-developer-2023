@@ -23,18 +23,26 @@ export const getRatingThunk = () => async (dispatch) => {
 
 export const getInfoThunk = (url) => async (dispatch) => {
   dispatch({ type: 'LOADING_INFO', payload: 'loading' });
+  let payload = null;
 
   try {
-    const { data } = await axios.get(url || TEST_URL, {
-      headers: { 'Content-Type': 'application/json' },
-    });
-    console.log('Info: ', data);
-    const { name, weight, height, abilities } = data;
-    const abilityArray = abilities.map(({ ability }) => ability.name);
-    dispatch({
-      type: 'GET_INFO',
-      payload: { name, weight, height, abilities: abilityArray },
-    });
+    const storageData = localStorage.getItem(url);
+    if (storageData) {
+      console.log('Data from storage...');
+      payload = JSON.parse(storageData);
+    } else {
+      const { data } = await axios.get(url || TEST_URL, {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      console.log('Info: ', data);
+      const { name, weight, height, abilities } = data;
+      const abilityArray = abilities.map(({ ability }) => ability.name);
+
+      payload = { name, weight, height, abilities: abilityArray };
+      localStorage.setItem(url, JSON.stringify(payload));
+    }
+
+    dispatch({ type: 'GET_INFO', payload });
   } catch (error) {
     console.error('Error getInfoThunk():', error);
     dispatch({ type: 'INFO_ERROR', payload: error });

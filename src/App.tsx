@@ -1,6 +1,6 @@
 import React from 'react';
 // import { Navigation } from 'src/navigation';
-import { store } from './store/redux/store.js';
+import store from 'src/store/redux/store';
 import { Provider } from 'react-redux';
 import Rating from 'components/Rating/Rating';
 
