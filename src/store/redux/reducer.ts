@@ -1,20 +1,6 @@
-type InfoType = {
-  name: string;
-  weight: number;
-  height: number;
-  abilities: string[];
-};
+import { InitialStoreType } from '../types';
 
-type InitialStoreType = {
-  loadingList: boolean;
-  loadingInfo: boolean;
-  ratingList: string[];
-  info: InfoType;
-  errorList: null;
-  errorInfo: null;
-};
-
-const initialState = {
+const initialState: InitialStoreType = {
   loadingList: false,
   loadingInfo: false,
   ratingList: [],
