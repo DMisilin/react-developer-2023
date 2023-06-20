@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import moxios from 'moxios';
-import { getRatingThunk, getInfoThunk } from '../../store/thunk/reting-think';
+import { getRatingThunk, getInfoThunk } from 'src/store/thunk/rating-think';
 
 const mockStore = configureMockStore([thunk]);
 const TEST_LIST = Array(50).fill({ name: 'test', weight: 1, height: 2, abilities: [{ability: {name: 'ability'}}] });
