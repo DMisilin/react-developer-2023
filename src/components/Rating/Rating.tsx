@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
-import { getInfoThunk, getRatingThunk } from 'src/store/thunk/rating-think';
+import { getInfoThunk, getRatingThunk } from '../../store/thunk/rating-think';
 import Button from '../Button/Button';
 
 type State = {
@@ -14,13 +14,14 @@ type State = {
 };
 
 const Rating = ({ testMode = true }) => {
+  console.log('lo_ol_line_17--> testMode: ', testMode);
   const dispatch = useDispatch();
   const { loadingList, loadingInfo, ratingList, info, errorList, errorInfo } =
     useSelector((state: State) => state);
 
   useEffect(() => {
     // @ts-ignore
-    dispatch(getRatingThunk());
+    dispatch(getRatingThunk(testMode));
   }, []);
 
   const click = () => {
@@ -43,7 +44,9 @@ const Rating = ({ testMode = true }) => {
 
       <div className="rating-block">
         <div>{errorList && <div>{JSON.stringify(errorList)}</div>}</div>
-        {loadingList ? <div>LOADING...</div> : (
+        {loadingList ? (
+          <div>LOADING...</div>
+        ) : (
           <div role="Rating" className="rating">
             {ratingList.map(({ name, url }, i) => (
               <div key={url} className="line">

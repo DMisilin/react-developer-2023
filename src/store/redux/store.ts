@@ -4,7 +4,7 @@ import {
   Store,
 } from 'redux';
 import thunk from 'redux-thunk';
-import { rootReducer } from 'src/store/redux/reducer';
+import { rootReducer } from './reducer';
 import { InitialStoreType } from '../types';
 
 interface Payload {

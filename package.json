@@ -4,7 +4,7 @@
   "description": "Repository for OTUS react developer",
   "main": "index.js",
   "scripts": {
-    "test": "jest --config=jest.config.js --no-cache",
+    "test": "jest --config=jest.config.js --no-cache --coverage",
     "lint": "eslint . --ext .ts",
     "calc": "npx ts-node ./src/lesson-2/index.ts",
     "dev": "webpack-cli serve --mode=development --env development --open --hot",

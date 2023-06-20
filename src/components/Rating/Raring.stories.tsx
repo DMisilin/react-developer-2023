@@ -2,7 +2,7 @@ import React from 'react';
 
 import Rating from '../Rating/Rating';
 import { Provider } from 'react-redux';
-import store from 'src/store/redux/store';
+import store from '../../store/redux/store';
 
 export default {
   title: 'Rating',
