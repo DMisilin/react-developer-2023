@@ -5,8 +5,8 @@ import {
   StyledForm,
   StyledButton,
   StyledP,
-} from '../styles/components';
-import { getRandomArray } from '../helper/methods';
+} from 'src/components/styles/components';
+import { getRandomArray } from 'src/components/helper/methods';
 
 type StartDataType = {
   size: string;

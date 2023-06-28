@@ -2,7 +2,7 @@ import React from 'react';
 // import { Navigation } from 'src/navigation';
 import store from 'src/store/redux/store';
 import { Provider } from 'react-redux';
-import Rating from './components/Rating/Rating';
+import Rating from 'src/components/Rating/Rating';
 import { BrowserRouter } from 'react-router-dom';
 
 const App = () => {

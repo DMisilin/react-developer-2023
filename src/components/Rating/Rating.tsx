@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
-import { getInfoThunk, getRatingThunk } from '../../store/thunk/rating-think';
-import Button from '../Button/Button';
+import { getInfoThunk, getRatingThunk } from 'src/store/thunk/rating-think';
+import Button from 'src/components/Button/Button';
 
 type State = {
   loadingList: false;

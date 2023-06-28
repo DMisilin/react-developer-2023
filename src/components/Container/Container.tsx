@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Rating from '../Rating/Rating';
+import Rating from 'src/components/Rating/Rating';
 
 const RATING_URL = 'http://localhost:3999/rating';
 

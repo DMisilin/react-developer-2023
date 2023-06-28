@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Enter } from '../components/Enter';
-import { Floor } from '../components/Floor/Floor';
-import { NotFound } from '../components/NotFound/NotFound';
+import { Enter } from 'src/components/Enter';
+import { Floor } from 'src/components/Floor/Floor';
+import { NotFound } from 'src/components/NotFound/NotFound';
 
 export const Navigation: FC = () => (
   <BrowserRouter basename="/react-developer-2023">

@@ -1,4 +1,4 @@
-import { InitialStoreType } from '../types';
+import { InitialStoreType } from 'src/store/types';
 
 const initialState: InitialStoreType = {
   loadingList: false,
