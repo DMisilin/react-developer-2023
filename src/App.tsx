@@ -9,7 +9,7 @@ const App = () => {
   return (
     <>
       {/*<Navigation />*/}
-      <BrowserRouter basename="react-developer-2023">
+      <BrowserRouter>
         <Provider store={store}>
           <Rating testMode={false} />
         </Provider>
