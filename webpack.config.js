@@ -4,7 +4,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const { TsconfigPathsPlugin } = require('tsconfig-paths-webpack-plugin');
 
-
 const port = 3030;
 const dist = path.join(__dirname, 'dist');
 const src = path.join(__dirname, 'src');
@@ -16,12 +15,12 @@ module.exports = {
   target: 'web',
   stats: 'minimal',
   ignoreWarnings: [/export .* was not found in/],
-  output: {
-    path: dist,
-    publicPath: `https://dmisilin.github.io/react-developer-2023/`,
-    filename: `js/[name].js`,
-    chunkFilename: `js/[name].js`,
-  },
+  // output: {
+  //   path: dist,
+  //   publicPath: `https://dmisilin.github.io/react-developer-2023/`,
+  //   filename: `js/[name].js`,
+  //   chunkFilename: `js/[name].js`,
+  // },
   devServer: {
     port,
     hot: true,

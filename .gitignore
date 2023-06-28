@@ -28,3 +28,6 @@ coverage
 
 # Storybook log
 build-storybook.log
+
+# stryker temp files
+.stryker-tmp

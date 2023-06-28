@@ -14,7 +14,6 @@ type State = {
 };
 
 const Rating = ({ testMode = true }) => {
-  console.log('lo_ol_line_17--> testMode: ', testMode);
   const dispatch = useDispatch();
   const { loadingList, loadingInfo, ratingList, info, errorList, errorInfo } =
     useSelector((state: State) => state);
@@ -37,12 +36,12 @@ const Rating = ({ testMode = true }) => {
   };
 
   return (
-    <div className="rating-container">
-      <div className="rating-block">
+    <div className="rating-container" role="rating-role">
+      <div className="rating-block" role="refresh-button">
         <Button text="refresh" type="blue" onClick={click} />
       </div>
 
-      <div className="rating-block">
+      <div className="rating-block" role="rating-list">
         <div>{errorList && <div>{JSON.stringify(errorList)}</div>}</div>
         {loadingList ? (
           <div>LOADING...</div>
@@ -60,7 +59,7 @@ const Rating = ({ testMode = true }) => {
         )}
       </div>
 
-      <div className="rating-block">
+      <div className="rating-block" role="block-info">
         <div>{errorInfo && <div>{JSON.stringify(errorInfo)}</div>}</div>
         <div className="info">
           {loadingInfo ? (

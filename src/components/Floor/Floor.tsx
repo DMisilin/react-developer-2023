@@ -24,7 +24,10 @@ const TEST_ARRAY = [0, 1, 2, 3, 4, 5, 4, 3, 2];
 export const Floor = ({ testMode = true }) => {
   const [isLeft, setIsLeft] = useState(true);
   const [exit, setExit] = useState(false);
-  const [startData, setStartData] = useState(START_DATA_DEFAULT);
+  const [startData, setStartData] = useState({
+    ...START_DATA_DEFAULT,
+    size: testMode ? '3x3' : '0x0',
+  });
   const [arr, setArr] = useState(testMode ? TEST_ARRAY : []);
   const [searchParams] = useSearchParams();
 
@@ -76,6 +79,7 @@ export const Floor = ({ testMode = true }) => {
       +startData.maxStartPoints,
     );
 
+    console.log('lo_ol_line_80--> newArray: ', newArray);
     setArr(newArray);
     setIsLeft(true);
   };
@@ -119,7 +123,7 @@ export const Floor = ({ testMode = true }) => {
         </div>
       </StyledCenteredDiv>
 
-      <div className="cleanButton">
+      <div className="cleanButton" role="cleanButton">
         <Button text="against" type="eco" onClick={() => clean()}></Button>
         <Button text="exit" type="blue" onClick={() => toExit()}></Button>
       </div>
