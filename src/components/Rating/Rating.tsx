@@ -1,26 +1,81 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import './Rating.css';
+import { getInfoThunk, getRatingThunk } from '../../store/thunk/rating-think';
+import Button from '../Button/Button';
 
-const TEST_RATING = [
-  { name: 'User 1', points: 10 },
-  { name: 'User 2', points: 20 },
-  { name: 'User 3', points: 130 },
-];
+type State = {
+  loadingList: false;
+  loadingInfo: false;
+  ratingList: [];
+  info: { name: string; weight: number; height: number; abilities: string[] };
+  errorList: null;
+  errorInfo: null;
+};
 
-const Rating = ({ rating, testMode = true }) => {
-  // !rating.length для gh-pages
-  const list = testMode || !rating.length ? TEST_RATING : rating;
+const Rating = ({ testMode = true }) => {
+  console.log('lo_ol_line_17--> testMode: ', testMode);
+  const dispatch = useDispatch();
+  const { loadingList, loadingInfo, ratingList, info, errorList, errorInfo } =
+    useSelector((state: State) => state);
+
+  useEffect(() => {
+    // @ts-ignore
+    dispatch(getRatingThunk(testMode));
+  }, []);
+
+  const click = () => {
+    dispatch({ type: 'LOADING_LIST' });
+    // @ts-ignore
+    dispatch(getRatingThunk());
+  };
+
+  const getInfo = (params) => {
+    dispatch({ type: 'LOADING_INFO' });
+    // @ts-ignore
+    dispatch(getInfoThunk(params));
+  };
 
   return (
-    <>
-      <div role="Rating" className="rating">
-        {list.map(({ name, points }, i) => (
-          <div key={i} role="RatingRaw" className="rating-raw">{`${
-            i + 1
-          } ${name} - ${points} pt`}</div>
-        ))}
+    <div className="rating-container">
+      <div className="rating-block">
+        <Button text="refresh" type="blue" onClick={click} />
       </div>
-    </>
+
+      <div className="rating-block">
+        <div>{errorList && <div>{JSON.stringify(errorList)}</div>}</div>
+        {loadingList ? (
+          <div>LOADING...</div>
+        ) : (
+          <div role="Rating" className="rating">
+            {ratingList.map(({ name, url }, i) => (
+              <div key={url} className="line">
+                <Button text="info" type="eco" onClick={() => getInfo(url)} />
+                <div role="RatingRaw" className="rating-raw">{`${
+                  i + 1
+                } ${name}`}</div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="rating-block">
+        <div>{errorInfo && <div>{JSON.stringify(errorInfo)}</div>}</div>
+        <div className="info">
+          {loadingInfo ? (
+            <div>LOADING...</div>
+          ) : (
+            <>
+              <div>{`name: ${info.name}`}</div>
+              <div>{`weight: ${info.height}`}</div>
+              <div>{`height: ${info.height}`}</div>
+              <div>{`abilities: ${JSON.stringify(info.abilities)}`}</div>
+            </>
+          )}
+        </div>
+      </div>
+    </div>
   );
 };
 
